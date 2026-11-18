@@ -4,7 +4,7 @@
 
 ## 开始使用
 
-1. 双击 `artifacts/portable/WindowTiler-0.5.3.exe`，无需安装，也无需另装 .NET。建议把 EXE 放在固定文件夹，方便更新和开机启动。
+1. 按下文“构建”步骤生成程序后，双击 `WindowTiler-0.5.3.exe`，无需安装，也无需另装 .NET 运行时。建议把 EXE 放在固定文件夹，方便更新和开机启动。
 2. 在左侧勾选窗口，在右侧选择目标显示器。点击“识别显示器”可在屏幕上显示编号。
 3. 设置布局、比例和间距。默认把所有勾选窗口平铺到右侧所选屏幕；切换屏幕时保留当前布局，预览始终使用这批已选窗口。
 4. 查看预览，点击“平铺到屏幕 N”。执行后将选中窗口显示到前面，每个窗口的执行结果会显示在列表中。
@@ -94,18 +94,18 @@ Windows 没有统一的“固定比例窗口”标记，且有些程序允许外
 
 ## 构建
 
-需要 .NET 10 SDK。默认生成自带运行时的单文件免安装 EXE，输出到 `artifacts/portable/WindowTiler-0.5.3.exe`。运行时不依赖其他第三方 NuGet 库。
+需要 .NET 10 SDK。在仓库根目录运行以下命令，生成自带运行时的单文件免安装 EXE；完成后，构建脚本会显示生成文件的位置。运行时不依赖其他第三方 NuGet 库。
 
 ```powershell
 .\scripts\build.ps1 -Dotnet dotnet
 ```
 
-加 `-SmokeTest` 可在桌面会话中启动专用测试窗口，验证窗口移动、状态恢复、跨屏分组、刷新选择、快捷键注册、主题切换和异常处理。只操作它创建的窗口，不操作用户窗口，不更改 Windows 主题。结果和浅色／深色截图保存到 `artifacts/qa/`。
+加 `-SmokeTest` 可在桌面会话中启动专用测试窗口，验证窗口移动、状态恢复、跨屏分组、刷新选择、快捷键注册、主题切换和异常处理。只操作它创建的窗口，不操作用户窗口，不更改 Windows 主题。
 
-本工作区构建命令：
+构建并运行验证：
 
 ```powershell
-.\scripts\build.ps1 -Dotnet '..\.window-tiler-tools\dotnet\dotnet.exe' -SmokeTest
+.\scripts\build.ps1 -Dotnet dotnet -SmokeTest
 ```
 
 ## 源码结构
@@ -119,6 +119,5 @@ Windows 没有统一的“固定比例窗口”标记，且有些程序允许外
 | `tests/WindowTiler.Core.Tests` | 无外部测试框架依赖的布局断言程序 |
 | `installer` | Inno Setup 安装脚本与中文界面文本 |
 | `scripts` | 构建、测试和发布脚本 |
-| `artifacts` | 编译产物、安装包及验证记录，不提交到版本库 |
 
 实际验证结果与待测项目见 `VALIDATION.md`。
